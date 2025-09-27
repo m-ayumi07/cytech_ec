@@ -1,0 +1,5 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>追加しました</title></head>
+<body><div th:replace="~{fragments/header :: header}"></div>
+<main class="container"><h1>カートに追加しました</h1>
+<p><a th:href="@{/cart}">カートを見る</a> / <a th:href="@{/product/list}">一覧に戻る</a></p></main>
+<div th:replace="~{fragments/footer :: footer}"></div></body></html>

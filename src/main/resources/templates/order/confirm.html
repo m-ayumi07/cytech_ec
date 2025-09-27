@@ -1,0 +1,36 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>確認</title>
+<link rel="stylesheet" th:href="@{/css/style.css}"></head><body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main class="container">
+  <h1>注文内容の確認</h1>
+  <h2>お届け先</h2>
+  <ul>
+    <li>氏名: <span th:text="${form.name}"></span></li>
+    <li>住所: <span th:text="${form.address}"></span></li>
+    <li>アパート: <span th:text="${form.apartment}"></span></li>
+    <li>カード番号: <span th:text="${form.cardNumber}"></span></li>
+  </ul>
+  <h2>商品</h2>
+  <table class="table">
+    <thead><tr><th>商品</th><th>数量</th><th>税込単価</th><th>小計</th></tr></thead>
+    <tbody>
+      <tr th:each="c : ${items}">
+        <td th:text="${c.product.productName}"></td>
+        <td th:text="${c.quantity}"></td>
+        <td th:text="${c.product.includeTax}"></td>
+        <td th:text="${c.product.includeTax * c.quantity}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div>合計（税込）: <strong th:text="${total}"></strong> 円</div>
+  <form th:action="@{/order/complete}" method="post" style="margin-top:8px;">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <input type="hidden" name="name" th:value="${form.name}">
+    <input type="hidden" name="address" th:value="${form.address}">
+    <input type="hidden" name="apartment" th:value="${form.apartment}">
+    <input type="hidden" name="cardNumber" th:value="${form.cardNumber}">
+    <button type="submit">注文確定</button>
+    <a th:href="@{/order/entry}" style="margin-left:8px;">編集に戻る</a>
+  </form>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div></body></html>

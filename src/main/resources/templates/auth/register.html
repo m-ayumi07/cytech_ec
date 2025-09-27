@@ -1,0 +1,14 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>新規登録</title></head>
+<body><h1>新規登録</h1>
+<form th:action="@{/auth/register/submit}" th:object="${registerForm}" method="post">
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+  <div><label>氏名: <input th:field="*{userName}"></label><div th:errors="*{userName}"></div></div>
+  <div><label>かな: <input th:field="*{userNameKana}"></label><div th:errors="*{userNameKana}"></div></div>
+  <div><label>メール: <input th:field="*{email}"></label><div th:errors="*{email}"></div></div>
+  <div><label>電話: <input th:field="*{phone}"></label><div th:errors="*{phone}"></div></div>
+  <div><label>住所: <input th:field="*{userAddress}"></label><div th:errors="*{userAddress}"></div></div>
+  <div><label>パスワード: <input type="password" th:field="*{password}"></label><div th:errors="*{password}"></div></div>
+  <div><label>確認用: <input type="password" th:field="*{confirmPassword}"></label><div th:errors="*{confirmPassword}"></div></div>
+  <button type="submit">登録</button>
+</form>
+<p><a th:href="@{/auth/login}">ログインへ</a></p></body></html>

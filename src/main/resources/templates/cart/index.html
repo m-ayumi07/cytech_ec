@@ -1,0 +1,35 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><title>カート</title>
+<link rel="stylesheet" th:href="@{/css/style.css}"></head><body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main class="container two-col"><section>
+<h1>カート内商品</h1>
+<table class="table">
+<thead><tr><th>商品</th><th>数量</th><th>税込単価</th><th>小計</th><th></th></tr></thead>
+<tbody>
+<tr th:each="c : ${items}">
+  <td><a th:href="@{'/product/' + ${c.product.id}}" th:text="${c.product.productName}">name</a></td>
+  <td>
+    <form th:action="@{'/cart/' + ${c.id} + '/qty'}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <select name="quantity" onchange="this.form.submit()">
+        <option th:each="i : ${#numbers.sequence(1,10)}" th:selected="${i==c.quantity}" th:value="${i}" th:text="${i}"></option>
+      </select>
+    </form>
+  </td>
+  <td th:text="${c.product.includeTax}"></td>
+  <td th:text="${c.product.includeTax * c.quantity}"></td>
+  <td>
+    <form th:action="@{'/cart/' + ${c.id} + '/delete'}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <button type="submit">削除</button>
+    </form>
+  </td>
+</tr>
+</tbody></table>
+</section>
+<aside class="sidebar"><h2>合計</h2>
+<div><strong th:text="${total}"></strong> 円（税込）</div>
+<p style="margin-top:8px;"><a th:href="@{/order/entry}"><button>レジに進む</button></a></p>
+</aside></main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body></html>

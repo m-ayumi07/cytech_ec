@@ -1,0 +1,6 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>TOP</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div th:replace="~{fragments/header :: header}"></div>
+<main class="container"><h1>TOP</h1>
+<p>上の検索から商品を探すか、<a th:href="@{/product/list}">商品一覧</a>へ進んでください。</p></main>
+<div th:replace="~{fragments/footer :: footer}"></div></body></html>
