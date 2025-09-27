@@ -22,24 +22,26 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/css/**",
                     "/img/**",
+                    "/images/**",
                     "/js/**",
                     "/auth/register",
-                    "/auth/register/submit"
+                    "/auth/register/submit",
+                    "/auth/login"
                 ).permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/auth/login")              
-                .loginProcessingUrl("/auth/login")     
-                .defaultSuccessUrl("/", true)          
-                .failureUrl("/auth/login?error")       
+                .loginPage("/auth/login")
+                .loginProcessingUrl("/auth/login")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/auth/login?error")
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutUrl("/logout")                        
-                .logoutSuccessUrl("/auth/login?logout")      
-                .invalidateHttpSession(true)                 
-                .deleteCookies("JSESSIONID")                 
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/auth/login?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .permitAll()
             );
 
