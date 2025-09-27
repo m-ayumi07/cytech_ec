@@ -18,7 +18,6 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // 認可設定
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/css/**",
